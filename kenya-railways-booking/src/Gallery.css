@@ -1,0 +1,113 @@
+/* Gallery.css */
+
+#gallery {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 45%;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.station {
+    margin-bottom: 20px;
+}
+
+.station h3 {
+    margin-top: 0;
+}
+
+.station p {
+    font-size: 16px;
+    color: #333;
+}
+
+.station button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.station button:hover {
+    background-color: #0056b3;
+}
+
+.additional-info img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-images {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    text-align: left;
+    width: 300px;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.gallery-item p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
