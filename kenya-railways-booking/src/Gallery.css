@@ -10,6 +10,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px; /* Added for better spacing between cards */
 }
 
 .card {
@@ -18,7 +19,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 10px;
-    width: 45%;
+    flex: 1 1 calc(50% - 40px); /* Adjusted to handle different screen sizes */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
 .card h2 {
@@ -66,25 +68,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 40px; /* Added margin for better spacing */
 }
 
 .gallery-images {
     display: flex;
-    overflow: hidden;
+    flex-wrap: wrap; /* Wrap images to the next row if needed */
+    justify-content: center; /* Center the gallery images */
+    gap: 20px; /* Space between images */
     width: 100%;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
 }
 
 .gallery-item {
-    flex: 0 0 auto;
+    flex: 1 1 300px; /* Flex-basis 300px ensures items are responsive */
+    max-width: 300px; /* Ensures the items don't grow too large */
     text-align: left;
-    width: 300px;
 }
 
 .gallery-item img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
 }
 
