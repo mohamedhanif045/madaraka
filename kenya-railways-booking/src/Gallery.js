@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Gallery.css';
 
 const Gallery = () => {
     const [showNairobi, setShowNairobi] = useState(false);
     const [showMombasa, setShowMombasa] = useState(false);
+    const [slideIndex, setSlideIndex] = useState(1);
 
     const handleNairobiClick = () => {
         setShowNairobi(!showNairobi);
@@ -13,58 +14,171 @@ const Gallery = () => {
         setShowMombasa(!showMombasa);
     };
 
+    const plusSlides = (n) => {
+        const newIndex = (slideIndex + n - 1 + 4) % 4 + 1;
+        setSlideIndex(newIndex);
+    };
+
+    useEffect(() => {
+        const slides = document.querySelectorAll(".mySlides");
+        slides.forEach((slide, index) => {
+            slide.style.display = (index + 1 === slideIndex) ? "block" : "none";
+        });
+    }, [slideIndex]);
+
     return (
         <section id="gallery">
-            <div className="card-container">
-                <div className="card featured-stations">
-                    <h2>Featured Stations</h2>
-                    <div className="station">
-                        <h3>Nairobi Terminus</h3>
-                        <p>Located at Syokimau, Nairobi. Found just south of the capital city. Built as Two trains with a bridge on top.</p>
-                        <button onClick={handleNairobiClick}>{showNairobi ? 'Hide' : 'SEE ALL'}</button>
-                        {showNairobi && (
-                            <div className="additional-info">
-                                {/* Add more content or images here */}
-                                <img src="data:image/jpeg;base64,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" alt=" NAIROBI SGR TRAINSTATION" />
-                                <img src="data:image/jpeg;base64,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" alt="Madaraka Express" />
-                                <img src="https://via.placeholder.com/600x400?text=Nairobi+Terminus+3" alt="Nairobi Terminus" />
-                            </div>
-                        )}
+            <div className="gallery-grid">
+                <div className="featured-stations">
+                    <h2 className="section-title">Featured Stations</h2>
+
+                    <div className="card">
+                        <img 
+                            src="https://metickets.krc.co.ke/images/stations/54_n.jpg" 
+                            alt="Nairobi Terminus" 
+                            className="station-image" 
+                        />
+                        <div className="card-content">
+                            <h3>Nairobi Terminus</h3>
+                            <p>Located at Syokimau, Nairobi. Found just south of the capital city. Built as two trains with a bridge on top.</p>
+                            <button className="toggle-btn" onClick={handleNairobiClick}>
+                                {showNairobi ? 'Hide' : 'SEE ALL'}
+                            </button>
+                            {showNairobi && (
+                                <div className="image-grid">
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/84_n.jpg" 
+                                            alt="Nairobi Terminus Interior View" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Interior view of Nairobi Terminus, showcasing its modern design.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/85_n.jpg" 
+                                            alt="Nairobi Terminus Platform" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Platform area of Nairobi Terminus, designed for efficient passenger flow.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/voi.jpg" 
+                                            alt="Nairobi Terminus Train Departure" 
+                                            className="grid-image" 
+                                        />
+                                        <p>View of a train departing from Nairobi Terminus, emphasizing the station's functionality.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/athi_river.jpg" 
+                                            alt="Nairobi Terminus Exterior" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Exterior shot of Nairobi Terminus, highlighting its architectural style.</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="station">
-                        <h3>Mombasa Terminus</h3>
-                        <p>Located in Miritini, Mombasa. Built as concentric circles and a central tower, representing a ripple in the ocean.</p>
-                        <button onClick={handleMombasaClick}>{showMombasa ? 'Hide' : 'SEE ALL'}</button>
-                        {showMombasa && (
-                            <div className="additional-info">
-                                {/* Add more content or images here */}
-                                <img src="https://via.placeholder.com/600x400?text=Mombasa+Terminus+1" alt="Mombasa Terminus" />
-                                <img src="https://via.placeholder.com/600x400?text=Mombasa+Terminus+2" alt="Mombasa Terminus" />
-                                <img src="https://via.placeholder.com/600x400?text=Mombasa+Terminus+3" alt="Mombasa Terminus" />
-                            </div>
-                        )}
+
+                    <div className="card">
+                        <img 
+                            src="https://metickets.krc.co.ke/images/stations/85_n.jpg" 
+                            alt="Mombasa Terminus" 
+                            className="station-image" 
+                        />
+                        <div className="card-content">
+                            <h3>Mombasa Terminus</h3>
+                            <p>Located in Miritini, Mombasa. Built as concentric circles and a central tower, representing a ripple in the ocean.</p>
+                            <button className="toggle-btn" onClick={handleMombasaClick}>
+                                {showMombasa ? 'Hide' : 'SEE ALL'}
+                            </button>
+                            {showMombasa && (
+                                <div className="image-grid">
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/emali.jpg" 
+                                            alt="Mombasa Terminus Exterior View" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Exterior view of Mombasa Terminus, showcasing its unique design elements.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/mariakani.jpg" 
+                                            alt="Mombasa Terminus Interior View" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Interior view of Mombasa Terminus, highlighting the modern amenities available.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/miasenyi_s.jpg" 
+                                            alt="Mombasa Terminus Passenger Area" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Passenger area within Mombasa Terminus, designed for comfort and efficiency.</p>
+                                    </div>
+                                    <div>
+                                        <img 
+                                            src="https://metickets.krc.co.ke/images/stations/kibwezi.jpg" 
+                                            alt="Mombasa Terminus Departure Area" 
+                                            className="grid-image" 
+                                        />
+                                        <p>Departure area at Mombasa Terminus, showcasing its operational layout.</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                <div className="card gallery">
-                    <h2>Gallery</h2>
-                    <button>Previous</button>
-                    <div className="gallery-images">
-                        <div className="gallery-item">
-                            <img src="https://via.placeholder.com/300x200?text=Train+1" alt="Train 1" />
-                            <p>This is a high-speed train traveling through the countryside. Known for its sleek design and incredible speed, this train represents modern engineering at its finest.</p>
+                <div className="gallery-section">
+                    <h2 className="section-title">Gallery</h2>
+                    <div className="slideshow-container">
+                        <div className="mySlides fade">
+                            <img 
+                                src="https://metickets.krc.co.ke/images/gallery/07_n.jpg" 
+                                alt="Train Interior 1" 
+                                className="gallery-image" 
+                            />
+                            <p>Inside view of the Nairobi-Mombasa express train, showing the seating arrangement and interior design.</p>
                         </div>
-                        <div className="gallery-item">
-                            <img src="https://via.placeholder.com/300x200?text=Train+2" alt="Train 2" />
-                            <p>This vintage steam train evokes nostalgia with its classic design and historical significance. It reflects the early days of rail travel when steam engines were the marvel of the industrial age.</p>
+                        <div className="mySlides fade">
+                            <img 
+                                src="https://metickets.krc.co.ke/images/gallery/56_n.jpg" 
+                                alt="Train Interior 2" 
+                                className="gallery-image" 
+                            />
+                            <p>View of the first-class compartment with spacious seating and advanced amenities.</p>
                         </div>
-                        {/* Add more images as needed */}
+                        <div className="mySlides fade">
+                            <img 
+                                src="https://metickets.krc.co.ke/images/gallery/60_n.jpg" 
+                                alt="Train Interior 3" 
+                                className="gallery-image" 
+                            />
+                            <p>Second-class seating area, offering comfort and convenience for travelers.</p>
+                        </div>
+                        <div className="mySlides fade">
+                            <img 
+                                src="https://metickets.krc.co.ke/images/gallery/64_n.jpg" 
+                                alt="Train Interior 4" 
+                                className="gallery-image" 
+                            />
+                            <p>Passenger lounge area, providing a relaxing space to unwind during the journey.</p>
+                        </div>
                     </div>
-                    <button>Next</button>
+                    <div className="gallery-buttons">
+                        <button className="gallery-nav-btn" onClick={() => plusSlides(-1)}>⬅</button>
+                        <button className="gallery-nav-btn" onClick={() => plusSlides(1)}>➡</button>
+                    </div>
                 </div>
             </div>
         </section>
     );
-}
+};
 
 export default Gallery;
